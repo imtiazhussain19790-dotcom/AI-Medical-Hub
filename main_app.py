@@ -41,29 +41,46 @@ elif selection == "BMI Calculator":
 
 # اب ڈائیبیٹیز والا حصہ بالکل بائیں طرف (Margin پر) ہونا چاہیے
 elif selection == "Diabetes Prediction":
-    st.title("Diabetes Prediction (Direct Logic)")
+    st.title("Diabetes Prediction (Detailed Analysis)")
     
-    glucose = st.number_input('Glucose Level', min_value=0)
-    bmi_val = st.number_input('BMI Value', min_value=0.0)
-    age_db = st.number_input('Age of the person', min_value=1)
+    col1, col2 = st.columns(2)
+    with col1:
+        glucose = st.number_input('Glucose Level', min_value=0)
+        blood_pressure = st.number_input('Blood Pressure Value', min_value=0)
+        insulin = st.number_input('Insulin Level', min_value=0)
+    with col2:
+        bmi_val = st.number_input('BMI Value', min_value=0.0)
+        age_db = st.number_input('Age', min_value=1)
+        pregnancies = st.number_input('Number of Pregnancies', min_value=0, step=1)
 
     if st.button("Diabetes Test Result"):
-        # ڈائیبیٹیز کے لیے میڈیکل اسٹینڈرڈ لاجک
-        if glucose > 140 or (bmi_val > 30 and glucose > 120):
-            st.error("The person is predicted to be Diabetic.")
+        # بہتر لاجک
+        if (glucose > 140 and age_db > 40) or (glucose > 170) or (bmi_val > 35 and glucose > 125):
+            st.error("The system predicts a High Risk of Diabetes.")
+        elif glucose > 100:
+            st.warning("Pre-diabetic stage: Please control your sugar intake.")
         else:
-            st.success("The person is predicted to be Not Diabetic.")
+            st.success("Result: Healthy (Not Diabetic)")
 elif selection == "Heart Disease":
-    st.title("Heart Disease Prediction (Direct Logic)")
+    st.title("Heart Disease Analysis")
     
-    st.info("Entering data for AI analysis...")
-    age = st.number_input('Age', min_value=1, step=1)
-    chol = st.number_input('Serum Cholestoral', min_value=100)
-    trestbps = st.number_input('Resting Blood Pressure', min_value=80)
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        age = st.number_input('Age', min_value=1)
+        sex = st.selectbox('Sex', ['Male', 'Female'])
+    with col2:
+        trestbps = st.number_input('Resting BP', min_value=50)
+        chol = st.number_input('Cholesterol', min_value=100)
+    with col3:
+        fbs = st.selectbox('Fasting Blood Sugar > 120', ['Yes', 'No'])
+        cp = st.selectbox('Chest Pain Type (0-3)', [0, 1, 2, 3])
 
-    if st.button("Predict Heart Disease"):
-        # ایک سادہ لیکن موثر میڈیکل لاجک
-        if (age > 55 and chol > 240) or (trestbps > 150 and age > 50):
-            st.error("High Risk Detected: The system suggests a high probability of heart issues.")
+    if st.button("Check Heart Health"):
+        # اسمارٹ لاجک
+        is_male = 1 if sex == 'Male' else 0
+        has_fbs = 1 if fbs == 'Yes' else 0
+        
+        if (age > 50 and chol > 240) or (trestbps > 150) or (cp > 1 and age > 45):
+            st.error("High Risk: Significant indicators of heart issues detected.")
         else:
-            st.success("Low Risk: Based on the current parameters, your heart health looks stable.")
+            st.success("Low Risk: Your heart parameters seem within normal range.")
