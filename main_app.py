@@ -51,9 +51,9 @@ elif selection == "Diabetes Prediction":
         diab_prediction = diabetes_model.predict([user_input])
         
         if diab_prediction[0] == 1:
-            st.error("The person is Diabetic")
+              st.error("The person is Diabetic")
         else:
-            st.success("The person is Not Diabetic")
+              st.success("The person is Not Diabetic")
 
 # Placeholder for Heart Disease App
   elif selection == "Heart Disease":
