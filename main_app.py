@@ -1,5 +1,8 @@
 import streamlit as st
+selection = st.sidebar.selectbox("Select Page", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease"])
 
+if selection == "Home":
+    st.title("Welcome to AI Medical Hub")
 # --- BMI Calculator Section ---
 if selection == "BMI Calculator":
     st.title("Advanced BMI Calculator")
