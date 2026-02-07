@@ -29,7 +29,7 @@ elif selection=="BMI Calculator":
     st.info("Coming Soon: Integrating your Diabetes Model here.")
 
 # Placeholder for Heart Disease App
- elif selection == "Heart Disease":
+  elif selection == "Heart Disease":
     st.title("Heart Disease Prediction")
     st.info("Coming Soon: Integrating your Heart Disease Model here.")
 
