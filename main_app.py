@@ -14,7 +14,7 @@ elif selection=="BMI Calculator":
   height=st.number_input("Enter your Height (meters)",min_value=0.1)
   if height > 0:
     bmi=weight / (height * height)
-    st.write(f### Your BMI is: {bmi:,2f}")
+    st.write(f"### Your BMI is: {bmi:,2f}")
     if bmi < 18.5:
        st.warning("Underweight")
              elif 18.5 <= bmi < 25:
