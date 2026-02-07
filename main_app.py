@@ -1,7 +1,7 @@
 import streamlit as st
 # Sidebar for Navigation
 st.sidebar.title("Main Menu")
-selection=st.sidebar.selecbox("Choose an App",["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease"])
+selection=st.sidebar.selectbox("Choose an App",["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease"])
 # Home Page
 if selection == "Home":
   st.title("Welcome to AI Medical Hub")
