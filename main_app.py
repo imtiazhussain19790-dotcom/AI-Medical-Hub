@@ -24,7 +24,7 @@ elif selection=="BMI Calculator":
       else:
         st.error("Obesity")
 # Placeholder for Diabetes App
- elif selection == "Diabetes Prediction":
+  elif selection == "Diabetes Prediction":
     st.title("Diabetes Prediction")
     st.info("Coming Soon: Integrating your Diabetes Model here.")
 
