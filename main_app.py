@@ -27,20 +27,15 @@ elif selection=="BMI Calculator":
 
 # اب ڈائیبیٹیز والا حصہ بالکل بائیں طرف (Margin پر) ہونا چاہیے
 elif selection == "Diabetes Prediction":
-    st.title("Diabetes Page is under maintenance")
-
-elif selection == "Heart Disease":
-    st.title("Heart Disease Prediction (Direct Logic)")
+    st.title("Diabetes Prediction (Direct Logic)")
     
-    st.info("Entering data for AI analysis...")
-    age = st.number_input('Age', min_value=1, step=1)
-    chol = st.number_input('Serum Cholestoral', min_value=100)
-    trestbps = st.number_input('Resting Blood Pressure', min_value=80)
+    glucose = st.number_input('Glucose Level', min_value=0)
+    bmi_val = st.number_input('BMI Value', min_value=0.0)
+    age_db = st.number_input('Age of the person', min_value=1)
 
-    if st.button("Predict Heart Disease"):
-        # ایک سادہ لیکن موثر میڈیکل لاجک
-        if (age > 55 and chol > 240) or (trestbps > 150 and age > 50):
-            st.error("High Risk Detected: The system suggests a high probability of heart issues.")
+    if st.button("Diabetes Test Result"):
+        # ڈائیبیٹیز کے لیے میڈیکل اسٹینڈرڈ لاجک
+        if glucose > 140 or (bmi_val > 30 and glucose > 120):
+            st.error("The person is predicted to be Diabetic.")
         else:
-            st.success("Low Risk: Based on the current parameters, your heart health looks stable.")
-
+            st.success("The person is predicted to be Not Diabetic.")
