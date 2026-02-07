@@ -30,7 +30,7 @@ elif selection == "Diabetes Prediction":
     st.title("Diabetes Prediction using AI")
     
     # Load the model
-    diabetes_model = pickle.load(open('diabetes_model.pkl', 'rb'))
+    diabetes_model = pickle.load(open('diabetes_model.pk1', 'rb'))
     
     # Input fields for user (English)
     col1, col2 = st.columns(2)
