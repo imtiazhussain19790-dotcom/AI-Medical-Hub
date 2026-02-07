@@ -57,8 +57,36 @@ with open('diabetes_model.pkl', 'rb') as f:
 
 # Placeholder for Heart Disease App
     elif selection == "Heart Disease":
-              st.title("Heart Disease Prediction")
-              st.info("Coming Soon: Integrating your Heart Disease Model here.")
+    st.title("Heart Disease Prediction using AI")
+try:
+        heart_model = pickle.load(open('heart_model.sav', 'rb'))
+        
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            age = st.number_input('Age', min_value=1)
+            trestbps = st.number_input('Resting Blood Pressure', min_value=1)
+            restecg = st.number_input('Resting Electrocardiographic results', min_value=0)
+        with col2:
+            sex = st.number_input('Sex (1 = male; 0 = female)', min_value=0, max_value=1)
+            chol = st.number_input('Serum Cholestoral in mg/dl', min_value=1)
+            thalach = st.number_input('Maximum Heart Rate achieved', min_value=1)
+        with col3:
+            cp = st.number_input('Chest Pain types', min_value=0)
+            fbs = st.number_input('Fasting Blood Sugar > 120 mg/dl', min_value=0)
+            exang = st.number_input('Exercise Induced Angina', min_value=0)
+
+        # Prediction Button
+        if st.button('Heart Disease Test Result'):
+            user_input = [age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, 0.0, 0, 0, 0] # 13 inputs
+            prediction = heart_model.predict([user_input])
+            
+            if prediction[0] == 1:
+                st.error('The person is having heart disease')
+            else:
+                st.success('The person does not have any heart disease')
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+             
 
 
 
