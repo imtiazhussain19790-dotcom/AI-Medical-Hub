@@ -26,10 +26,10 @@ else:
       st.error("Obesity")
 
 # اب ڈائیبیٹیز والا حصہ بالکل بائیں طرف (Margin پر) ہونا چاہیے
-elif selection == "Diabetes Prediction":
+  elif selection == "Diabetes Prediction":
     st.title("Diabetes Page is under maintenance")
 
-elif selection == "Heart Disease":
+  elif selection == "Heart Disease":
     st.title("Heart Disease Page is under maintenance")
 
 elif selection == "Heart Disease":
