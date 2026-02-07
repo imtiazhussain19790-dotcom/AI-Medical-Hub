@@ -21,8 +21,8 @@ elif selection=="BMI Calculator":
         st.success("Healthy")
       elif 25 <= bmi < 30:
         st.info("Overweight")
-             else:
-                  st.error("Obesity")
+      else:
+        st.error("Obesity")
 # Placeholder for Diabetes App
  elif selection == "Diabetes Prediction":
     st.title("Diabetes Prediction")
