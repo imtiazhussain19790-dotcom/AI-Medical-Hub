@@ -9,21 +9,35 @@ if selection == "Home":
   st.subheader("Your All-in-One Health Monitoring System") 
   st.write("This Portal allows you to check your health statususing various AI tools.")
   # BMI Calculator Page
-elif selection=="BMI Calculator":
-  st.title("BMI Calculator")
-  weight=st.number_input("Enter your Weight (kg)",min_value=0.1)
-  height=st.number_input("Enter your Height (meters)",min_value=0.1)
-  if height > 0:
-      bmi=weight / (height * height)
-      st.write(f"### Your BMI is: {bmi:.2f}")
-      if bmi < 18.5:
-          st.warning("Underweight")
-      elif 18.5 <= bmi < 25:
-          st.success("Healthy")
-      elif 25 <= bmi < 30:
-          st.info("Overweight")
-      else:
-          st.error("Obesity")
+elif selection == "BMI Calculator":
+    st.title("Advanced BMI Calculator")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        weight = st.number_input("Enter your Weight (in kg)", min_value=1.0)
+        age = st.number_input("Enter your Age", min_value=1, max_value=120)
+        
+    with col2:
+        height = st.number_input("Enter your Height (in meters)", min_value=0.1)
+        gender = st.selectbox("Gender", ["Male", "Female", "Other"])
+
+    if st.button("Calculate BMI"):
+        if height > 0:
+            bmi = weight / (height * height)
+            st.write(f"### Your BMI is: {bmi:.2f}")
+            
+            # Age ke mutabiq thoda farq padta hai, lekin standard range ye hai:
+            if bmi < 18.5:
+                st.warning(f"Age {age}: You are Underweight")
+            elif 18.5 <= bmi < 25:
+                st.success(f"Age {age}: You are Healthy/Normal")
+            elif 25 <= bmi < 30:
+                st.info(f"Age {age}: You are Overweight")
+            else:
+                st.error(f"Age {age}: Obesity detected")
+        else:
+            st.error("Height must be greater than 0")
 
 # اب ڈائیبیٹیز والا حصہ بالکل بائیں طرف (Margin پر) ہونا چاہیے
 elif selection == "Diabetes Prediction":
