@@ -31,7 +31,6 @@ elif selection == "Diabetes Prediction":
     
     # Load the model
     diabetes_model = pickle.load(open('diabetes_model.pkl', 'rb'))
-    
     # Input fields for user (English)
     col1, col2 = st.columns(2)
     with col1:
