@@ -56,7 +56,7 @@ elif selection == "Diabetes Prediction":
               st.success("The person is Not Diabetic")
 
 # Placeholder for Heart Disease App
-        elif selection == "Heart Disease":
+    elif selection == "Heart Disease":
               st.title("Heart Disease Prediction")
               st.info("Coming Soon: Integrating your Heart Disease Model here.")
 
