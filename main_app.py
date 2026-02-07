@@ -13,7 +13,7 @@ elif selection=="BMI Calculator":
   st.title("BMI Calculator")
   weight=st.number_input("Enter your Weight (kg)",min_value=0.1)
   height=st.number_input("Enter your Height (meters)",min_value=0.1)
-  if height > 0:
+if height > 0:
       bmi=weight / (height * height)
       st.write(f"### Your BMI is: {bmi:,2f}")
     if bmi < 18.5:
