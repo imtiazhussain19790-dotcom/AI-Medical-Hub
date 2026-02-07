@@ -53,7 +53,7 @@ elif selection == "Diabetes Prediction":
         if diab_prediction[0] == 1:
             st.error("The person is Diabetic")
         else:
-            st.success("The person is Not Diabetic"))
+            st.success("The person is Not Diabetic")
 
 # Placeholder for Heart Disease App
   elif selection == "Heart Disease":
