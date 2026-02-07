@@ -1,11 +1,29 @@
 import streamlit as st
-selection = st.sidebar.selectbox("Select Page", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease"])
-
+selection = st.sidebar.selectbox("Select Page", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease", "About Me"])
 if selection == "Home":
     st.title("Welcome to AI Medical Hub")
 # --- BMI Calculator Section ---
 if selection == "BMI Calculator":
     st.title("Advanced BMI Calculator")
+if selection == "About Me":
+    st.title("About the Developer")
+    st.subheader("Developed by: [Imtiaz Hussain]") 
+    
+    st.write("""
+    Welcome to the **AI Medical Hub**. This project was created to provide quick health insights 
+    using logical analysis. I have integrated multiple health tools like BMI calculation, 
+    Diabetes risk assessment, and Heart health monitoring into one platform.
+    """)
+    
+    st.info("### My Contribution:")
+    st.write("""
+    * Designed the User Interface using Streamlit.
+    * Implemented logical diagnostic rules for instant feedback.
+    * Added health recommendations and lifestyle tips for users.
+    * Ensured the app remains lightweight and error-free by using direct code logic.
+    """)
+
+    st.warning("⚠️ **Disclaimer:** This application is for educational purposes only. The results are based on general health logic and should not be taken as a final medical diagnosis. Always consult a certified doctor for professional advice.")
     
     col1, col2 = st.columns(2)
     with col1:
