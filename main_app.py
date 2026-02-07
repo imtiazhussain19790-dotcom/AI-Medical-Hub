@@ -39,3 +39,17 @@ elif selection == "Diabetes Prediction":
             st.error("The person is predicted to be Diabetic.")
         else:
             st.success("The person is predicted to be Not Diabetic.")
+elif selection == "Heart Disease":
+    st.title("Heart Disease Prediction (Direct Logic)")
+    
+    st.info("Entering data for AI analysis...")
+    age = st.number_input('Age', min_value=1, step=1)
+    chol = st.number_input('Serum Cholestoral', min_value=100)
+    trestbps = st.number_input('Resting Blood Pressure', min_value=80)
+
+    if st.button("Predict Heart Disease"):
+        # ایک سادہ لیکن موثر میڈیکل لاجک
+        if (age > 55 and chol > 240) or (trestbps > 150 and age > 50):
+            st.error("High Risk Detected: The system suggests a high probability of heart issues.")
+        else:
+            st.success("Low Risk: Based on the current parameters, your heart health looks stable.")
