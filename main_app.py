@@ -15,8 +15,8 @@ elif selection=="BMI Calculator":
   if height > 0:
     bmi=weight / (height * height)
     st.write(f"### Your BMI is: {bmi:,2f}")
-    if bmi < 18.5:
-       st.warning("Underweight")
+             if bmi < 18.5:
+                  st.warning("Underweight")
              elif 18.5 <= bmi < 25:
                   st.success("Healthy")
              elif 25 <= bmi < 30:
