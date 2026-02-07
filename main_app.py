@@ -55,40 +55,45 @@ with open('diabetes_model.pkl', 'rb') as f:
         else:
               st.success("The person is Not Diabetic")
 
-# Placeholder for Heart Disease App
-    elif selection == "Heart Disease":
+# Heart Disease Prediction Page
+elif selection == "Heart Disease":
     st.title("Heart Disease Prediction using AI")
-try:
-        heart_model = pickle.load(open('heart_model.sav', 'rb'))
+
+    # ماڈل لوڈ کریں
+    try:
+        # آپ کی فائل کا نام 'heart_model.pkl' ہے، اسے یہاں استعمال کریں
+        heart_model = pickle.load(open('heart_model.pkl', 'rb'))
+        
+        st.write("Please enter the following details:")
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            age = st.number_input('Age', min_value=1)
-            trestbps = st.number_input('Resting Blood Pressure', min_value=1)
-            restecg = st.number_input('Resting Electrocardiographic results', min_value=0)
+            age = st.number_input('Age', min_value=1, step=1)
+            trestbps = st.number_input('Resting Blood Pressure', min_value=1, step=1)
+            chol = st.number_input('Serum Cholestoral in mg/dl', min_value=1, step=1)
+            fbs = st.number_input('Fasting Blood Sugar > 120 mg/dl (1=True, 0=False)', min_value=0, max_value=1)
         with col2:
             sex = st.number_input('Sex (1 = male; 0 = female)', min_value=0, max_value=1)
-            chol = st.number_input('Serum Cholestoral in mg/dl', min_value=1)
-            thalach = st.number_input('Maximum Heart Rate achieved', min_value=1)
+            restecg = st.number_input('Resting ECG results', min_value=0, max_value=2)
+            thalach = st.number_input('Max Heart Rate achieved', min_value=1, step=1)
+            exang = st.number_input('Exercise Induced Angina (1=Yes, 0=No)', min_value=0, max_value=1)
         with col3:
-            cp = st.number_input('Chest Pain types', min_value=0)
-            fbs = st.number_input('Fasting Blood Sugar > 120 mg/dl', min_value=0)
-            exang = st.number_input('Exercise Induced Angina', min_value=0)
+            cp = st.number_input('Chest Pain types (0-3)', min_value=0, max_value=3)
+            oldpeak = st.number_input('ST depression induced by exercise', min_value=0.0)
+            slope = st.number_input('Slope of the peak exercise ST segment', min_value=0, max_value=2)
+            ca = st.number_input('Major vessels colored by flourosopy (0-3)', min_value=0, max_value=3)
+            thal = st.number_input('thal: 0 = normal; 1 = fixed defect; 2 = reversable defect', min_value=0, max_value=2)
 
         # Prediction Button
         if st.button('Heart Disease Test Result'):
-            user_input = [age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, 0.0, 0, 0, 0] # 13 inputs
+            # ماڈل کو 13 ویلیوز درکار ہیں
+            user_input = [age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]
             prediction = heart_model.predict([user_input])
             
             if prediction[0] == 1:
-                st.error('The person is having heart disease')
+                st.error('The person is predicted to have heart disease')
             else:
-                st.success('The person does not have any heart disease')
+                st.success('The person is predicted to be healthy')
+                
     except Exception as e:
-        st.error(f"Error loading model: {e}")
-             
-
-
-
-
-
+        st.error(f"Error loading Heart Model: {e}")
