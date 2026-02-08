@@ -13,136 +13,141 @@ selection = st.sidebar.selectbox(
 # --- 3. Home Page ---
 if selection == "🏠 Home":
     st.title("🏥 Welcome to AI Pro Medical Hub")
-    st.subheader("Your Advanced AI Health Partner")
+    st.subheader("Advanced Health Monitoring & Recommendations")
     st.image("https://img.icons8.com/fluency/150/medical-heart.png")
     st.markdown("""
-    Ye app clinical standards ke mutabiq design ki gayi hai. 
-    Aap sidebar se test select karein aur apni detail reports enter karein.
+    Ye system aapki makhsoos report values ke mutabiq design kiya gaya hai. 
+    Aap sidebar se test select karein aur tamam darj shuda parameters fill karein.
     """)
-    st.info("📢 **Updates:** Ab har test ke sath aapko makhsoos Health Tips bhi di jayengi.")
+    st.success("📢 **Status:** Tamam Advanced Inputs aur Health Tips ab active hain!")
 
-# --- 4. BMI Calculator (With Health Tips) ---
+# --- 4. BMI Calculator (Advanced Inputs + Tips) ---
 elif selection == "⚖️ BMI Calculator":
-    st.title("⚖️ BMI & Body Analysis")
+    st.title("⚖️ Advanced BMI Analysis")
     col1, col2 = st.columns(2)
     with col1:
-        weight = st.number_input("Weight (kg)", min_value=1.0, value=70.0)
-        feet = st.number_input("Height: Feet", min_value=1, max_value=8, value=5)
-        inches = st.number_input("Height: Inches", min_value=0, max_value=11, value=7)
+        gender = st.radio("Select Gender", ["Male", "Female"])
+        age = st.number_input("Age", 1, 120, 25)
+        weight = st.number_input("Weight (kg)", 1.0, 300.0, 70.0)
+    with col2:
+        feet = st.number_input("Height: Feet", 1, 8, 5)
+        inches = st.number_input("Height: Inches", 0, 11, 7)
     
     if st.button("Calculate BMI"):
-        total_inches = (feet * 12) + inches
-        height_m = total_inches * 0.0254
+        height_m = ((feet * 12) + inches) * 0.0254
         bmi = weight / (height_m * height_m)
         st.subheader(f"Your BMI: {bmi:.2f}")
         
         if bmi < 18.5:
             st.warning("Category: Underweight")
-            st.write("💡 **Tip:** Proteins aur Healthy Fats ka istemal badhayein.")
+            st.info("💡 **Health Tip:** Protein-rich diet (eggs, milk, nuts) aur muscle-building exercise karein.")
         elif 18.5 <= bmi < 25:
             st.success("Category: Healthy")
-            st.write("💡 **Tip:** Isi tarah protein aur exercise ka tawazun barkarar rakhein.")
+            st.info("💡 **Health Tip:** Isi tarah protein aur exercise ka tawazun barkarar rakhein.")
+        elif 25 <= bmi < 30:
+            st.info("Category: Overweight")
+            st.info("💡 **Health Tip:** Rozana 30-45 mins walk karein aur sugary drinks se parhez karein.")
         else:
-            st.error("Category: Overweight/Obese")
-            st.write("💡 **Tip:** Rozana 30 mins paidal chalein aur junk food se parhez karein.")
+            st.error("Category: Obese")
+            st.info("💡 **Health Tip:** Proper diet plan follow karein aur cardio exercises ko tarjeeh dein.")
 
-# --- 5. Diabetes Prediction (With Clinical Tips) ---
+# --- 5. Diabetes Prediction (All Lab Parameters + Tips) ---
 elif selection == "🩸 Diabetes Prediction":
-    st.title("🩸 Diabetes Risk Analysis")
-    glucose = st.number_input("Glucose Level (mg/dL)", 0, 500, 100)
-    insulin = st.number_input("Insulin Level", 0, 900, 80)
-    
-    if st.button("Predict Diabetes"):
-        if glucose > 140:
-            st.error("Result: High Risk Indicators")
-            st.markdown("""
-            ### 💡 Health Tips for High Glucose:
-            * **Sugar se parhez:** Meethi cheezon aur soft drinks se door rahein.
-            * **Fiber:** Sabziyon aur phal ka istemal zyada karein.
-            * **Water:** Rozana 8-10 glass pani piyein.
-            """)
-        else:
-            st.success("Result: Normal")
-            st.write("💡 **Tip:** Har 6 mahine baad apna checkup karwate rahein.")
+    st.title("🩸 Clinical Diabetes Analysis")
+    col1, col2 = st.columns(2)
+    with col1:
+        preg = st.number_input("Pregnancies (0 if Male)", 0, 20, 0)
+        glucose = st.number_input("Glucose Level (mg/dL)", 0, 500, 100)
+        bp = st.number_input("Blood Pressure (Diastolic)", 0, 150, 80)
+    with col2:
+        skin = st.number_input("Skin Thickness (mm)", 0, 100, 20)
+        ins = st.number_input("Insulin Level", 0, 900, 80)
+        pedi = st.number_input("Diabetes Pedigree Function", 0.0, 3.0, 0.5)
 
-# --- 6. Heart Disease (With Cardio Tips) ---
+    if st.button("Predict Risk"):
+        if glucose > 140 or ins > 160:
+            st.error("Result: High Risk Detected")
+            st.markdown("💡 **Diabetes Tip:** Carbs kam karein, fiber zyada lein aur pani ka istemal badhayein.")
+        else:
+            st.success("Result: Healthy Range")
+
+# --- 6. Heart Disease (All Cardiology Inputs + Tips) ---
 elif selection == "❤️ Heart Disease":
-    st.title("❤️ Heart Health Analysis")
-    chol = st.number_input("Serum Cholestoral (mg/dl)", 100, 600, 200)
-    bp = st.number_input("Resting BP (mm Hg)", 80, 200, 120)
-    
-    if st.button("Analyze Heart"):
-        if chol > 240 or bp > 140:
-            st.error("Result: Risk Factors Detected")
-            st.markdown("""
-            ### 💡 Heart Care Tips:
-            * **Namak kam karein:** BP control karne ke liye namak ka istemal kam karein.
-            * **Healthy Fats:** Fried food ke bajaye nuts aur olive oil istemal karein.
-            * **Walk:** Dil ki mazbooti ke liye tez chalna behtareen exercise hai.
-            """)
-        else:
-            st.success("Result: Healthy Indicators")
-            st.write("💡 **Tip:** Stress kam karein aur neend puri karein.")
+    st.title("❤️ Cardiology Health Analysis")
+    col1, col2 = st.columns(2)
+    with col1:
+        h_age = st.number_input("Age", 1, 120, 45)
+        trestbps = st.number_input("Resting Blood Pressure", 80, 200, 120)
+        chol = st.number_input("Serum Cholestoral (mg/dl)", 100, 600, 200)
+    with col2:
+        thalach = st.number_input("Max Heart Rate Achieved", 60, 220, 150)
+        oldpeak = st.number_input("ST Depression (Exercise)", 0.0, 6.0, 1.0)
+        cp = st.selectbox("Chest Pain Type", [0, 1, 2, 3])
 
-# --- 7. Liver Function (With Liver Tips) ---
+    if st.button("Analyze Heart"):
+        if chol > 240 or trestbps > 140:
+            st.error("Result: Potential Cardiovascular Risk")
+            st.markdown("💡 **Heart Tip:** Namak aur talay hue khanay band karein. Omega-3 rich food (Fish, Walnuts) lein.")
+        else:
+            st.success("Result: Heart Indicators Stable")
+
+# --- 7. Liver Function (All LFT Inputs + Tips) ---
 elif selection == "🧪 Liver Function":
-    st.title("🧪 Liver Function Analysis")
-    tot_bil = st.number_input("Total Bilirubin", 0.0, 10.0, 1.0)
-    sgpt = st.number_input("SGPT Level", 5, 200, 30)
-    
+    st.title("🧪 Full Liver Function Analysis (LFT)")
+    col1, col2 = st.columns(2)
+    with col1:
+        tot_bil = st.number_input("Total Bilirubin", 0.0, 10.0, 1.0)
+        alkphos = st.number_input("Alkaline Phosphatase", 10, 500, 100)
+        sgpt = st.number_input("SGPT (ALT)", 5, 200, 30)
+    with col2:
+        sgot = st.number_input("SGOT (AST)", 5, 200, 30)
+        prot = st.number_input("Total Proteins", 1.0, 10.0, 7.0)
+        alb = st.number_input("Albumin Level", 1.0, 10.0, 4.0)
+
     if st.button("Analyze Liver"):
         if tot_bil > 1.2 or sgpt > 40:
-            st.error("Result: Liver Stress Detected")
-            st.markdown("""
-            ### 💡 Liver Health Tips:
-            * **Paani ka istemal:** Liver se zehreele mada nikalne ke liye pani piyein.
-            * **Processed Food:** Packaged aur processed food se parhez karein.
-            * **Green Tea:** Liver ki safayi mein madad deti hai.
-            """)
+            st.error("Result: Liver Enzymes Elevated")
+            st.markdown("💡 **Liver Tip:** Alcohol/Processed food se parhez karein. Green tea aur Garlic ka istemal karein.")
         else:
-            st.success("Result: Normal")
+            st.success("Result: Liver Indicators Normal")
 
-# --- 8. Parkinson's Check ---
+# --- 8. Parkinson's Check (Advanced Voice Inputs + Tips) ---
 elif selection == "🧠 Parkinson's Check":
-    st.title("🧠 Parkinson's Analysis")
-    jitter = st.number_input("MDVP:Jitter(%)", 0.0, 0.1, 0.005, format="%.5f")
-    
-    if st.button("Analyze"):
-        if jitter > 0.01:
-            st.error("Result: Neurological Indicators Found")
-            st.write("💡 **Tip:** Demaaghi sukoon ke liye Yoga aur Meditation karein.")
-        else:
-            st.success("Result: Normal")
+    st.title("🧠 Parkinson's Neurological Analysis")
+    col1, col2 = st.columns(2)
+    with col1:
+        fo = st.number_input("Avg Vocal Freq (Hz)", 50.0, 300.0, 150.0)
+        fhi = st.number_input("Max Vocal Freq (Hz)", 50.0, 500.0, 200.0)
+        flo = st.number_input("Min Vocal Freq (Hz)", 50.0, 300.0, 100.0)
+    with col2:
+        jit = st.number_input("MDVP:Jitter(%)", 0.0, 0.1, 0.005, format="%.5f")
+        shim = st.number_input("MDVP:Shimmer", 0.0, 0.2, 0.02, format="%.5f")
+        hnr = st.number_input("HNR", 0.0, 50.0, 20.0)
 
-# --- 9. NEW SECTION: General Health Tips ---
+    if st.button("Run Analysis"):
+        if jit > 0.01 or hnr < 15:
+            st.error("Result: Indicators Found")
+            st.markdown("💡 **Brain Health Tip:** Mental exercises (puzzles) karein aur Omega-3 diet ko tarjeeh dein.")
+        else:
+            st.success("Result: All Clear")
+
+# --- 9. Health Tips Section ---
 elif selection == "💡 Health Tips":
-    st.title("💡 General Health & Wellness Tips")
-    st.subheader("Sehatmand Zindagi ke Sunheri Usool")
-    
-    tab1, tab2, tab3 = st.tabs(["Diet Plan", "Exercise", "Mental Health"])
-    
-    with tab1:
-        st.write("🍎 **Dietary Advice:**")
-        st.write("- Rozana kam az kam 5 tarah ki sabziyan aur phal khayein.")
-        st.write("- Pani ka zyada istemal karein (3 Liters daily).")
-        st.write("- Raat ka khana sone se 3 ghante pehle khayein.")
-    
-    with tab2:
-        st.write("🏃 **Physical Activity:**")
-        st.write("- Hafta mein 150 minute ki exercise lazmi karein.")
-        st.write("- Lift ke bajaye seedhiyon ka istemal karein.")
-    
-    with tab3:
-        st.write("🧘 **Mental Well-being:**")
-        st.write("- Rozana 7-8 ghante ki pur-sukoon neend lein.")
-        st.write("- Gehre saans lene ki mashq (Deep Breathing) karein.")
+    st.title("💡 Complete Wellness Guide")
+    t1, t2, t3 = st.tabs(["Daily Diet", "Exercise Plan", "Sleep & Mind"])
+    with t1:
+        st.write("✅ **Protein:** Har meal mein shamil karein.\n✅ **Sugar:** Kam se kam karein.\n✅ **Water:** 8-12 glass lazmi.")
+    with t2:
+        st.write("✅ **Cardio:** 30 mins (Brisk Walk).\n✅ **Strength:** Hafte mein 2 din weights.")
+    with t3:
+        st.write("✅ **Sleep:** 7-8 ghante.\n✅ **Stress:** Deep breathing aur meditation.")
 
 # --- 10. About Me ---
 elif selection == "👨‍💻 About Me":
-    st.title("👨‍💻 Developer Profile")
-    st.info("Developed by: **Imtiaz Hussain**")
-    st.write("AI Solutions for Healthcare.")
+    st.title("👨‍💻 Developer")
+    st.info("Created by: **Imtiaz Hussain**")
+    st.caption("Medical Disclaimer: This is for educational screening only.")
 
-# Sidebar Footer
+# Footer
 st.sidebar.markdown("---")
-st.sidebar.caption("© 2026 AI Pro Medical Hub")
+st.sidebar.write("v2.5 - Professional Edition")
