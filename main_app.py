@@ -1,160 +1,87 @@
 import streamlit as st
-st.set_page_config(page_title="AI Medical Hub", layout="wide")
-selection = st.sidebar.selectbox("Go to", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease", "About Me"])
-# --- DESIGN FIX ---
-st.markdown("""
-    <style>
-    /* Force background color */
-    [data-testid="stAppViewContainer"] {
-        background-color: #e5e7eb;
-    }
-    
-    /* Force buttons to be blue and rounded */
-    div.stButton > button:first-child {
-        background-color: #007bff !important;
-        color: white !important;
-        border-radius: 10px !important;
-        height: 50px !important;
-        width: 100% !important;
-        border: 2px solid #0056b3 !important;
-    }
 
-    /* Sidebar styling */
-    [data-testid="stSidebar"] {
-        background-color: #ffffff;
-    }
-    </style>
-""", unsafe_allow_html=True)
+# 1. Page Configuration (App ka title aur icon browser tab ke liye)
+st.set_page_config(page_title="AI Medical Hub", page_icon="🏥")
 
-selection = st.sidebar.selectbox("Go to Page", [
-    "🏠 Home", 
-    "⚖️ BMI Calculator", 
-    "🩸 Diabetes Prediction", 
-    "🫀 Heart Disease", 
-    "🧠 Parkinson's Test", 
-    "🫁 Lung Cancer Risk", 
-    "👨‍💻 About Me"
-])
-if selection == "🏠 Home":
-    st.title("Welcome to AI Medical Hub")
-# --- BMI Calculator Section ---
-elif selection == "⚖️ BMI Calculator":
-    st.title("Advanced BMI Calculator") 
+# 2. Sidebar Navigation (Sirf ye ek menu rahega)
+st.sidebar.title("📌 Main Menu")
+selection = st.sidebar.selectbox(
+    "Select a Service:", 
+    ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease", "About Me"]
+)
 
+# --- 3. Home Page ---
+if selection == "Home":
+    st.title("🏥 AI Medical Hub")
+    st.subheader("Your Intelligent Health Companion")
+    st.image("https://img.icons8.com/fluency/150/medical-heart.png")
+    st.write("""
+    Welcome! This AI-powered tool helps you monitor your health status based on medical logic. 
+    Select a tool from the sidebar to get started.
+    """)
+    st.info("💡 **Note:** Stay active and eat healthy for a better lifestyle!")
+
+# --- 4. BMI Calculator ---
+elif selection == "BMI Calculator":
+    st.title("⚖️ BMI Calculator")
     col1, col2 = st.columns(2)
     with col1:
-        weight = st.number_input("Weight (kg)", min_value=1.0)
-        age = st.number_input("Age", min_value=1)
+        weight = st.number_input("Weight (kg)", min_value=1.0, value=70.0)
     with col2:
-        height = st.number_input("Height (meters)", min_value=0.1)
-        gender = st.selectbox("Gender", ["Male", "Female", "Other"])
-
+        height = st.number_input("Height (meters)", min_value=0.1, value=1.7)
+    
     if st.button("Calculate BMI"):
-        if height > 0:
-            bmi = weight / (height * height)
-            st.write(f"### Your BMI is: {bmi:.2f}")
-            
-            if bmi < 18.5:
-                st.warning("Underweight")
-                st.info("💡 **Health Tips:**\n* Increase calorie intake with nutrient-dense foods.\n* Include protein-rich snacks like nuts and yogurt.\n* Consult a nutritionist for a weight gain plan.")
-            elif 18.5 <= bmi < 25:
-                st.success("Healthy Weight")
-                st.info("💡 **Health Tips:**\n* Maintain your current lifestyle with a balanced diet.\n* Aim for at least 150 minutes of moderate exercise per week.")
-            elif 25 <= bmi < 30:
-                st.info("Overweight")
-                st.info("💡 **Health Tips:**\n* Reduce intake of processed sugars and fried foods.\n* Focus on portion control and fiber-rich vegetables.\n* Regular cardio exercises are highly recommended.")
-            else:
-                st.error("Obesity")
-                st.info("💡 **Health Tips:**\n* Consult a healthcare professional immediately.\n* Start with low-impact exercises like swimming or walking.\n* Limit refined carbohydrates and high-fat dairy.")
+        bmi = weight / (height * height)
+        st.subheader(f"Your BMI: {bmi:.2f}")
+        if bmi < 18.5:
+            st.warning("Category: Underweight")
+            st.write("👉 Focus on a protein-rich diet.")
+        elif 18.5 <= bmi < 25:
+            st.success("Category: Healthy")
+            st.write("👉 Keep up the good work!")
+        elif 25 <= bmi < 30:
+            st.info("Category: Overweight")
+            st.write("👉 Try adding 30 mins of daily exercise.")
+        else:
+            st.error("Category: Obese")
+            st.write("👉 Consult a specialist for a weight management plan.")
 
-# --- Diabetes Prediction Section ---
-elif selection == "🩸 Diabetes Prediction":
-    st.title("Diabetes Prediction (Analysis)")
+# --- 5. Diabetes Prediction ---
+elif selection == "Diabetes Prediction":
+    st.title("🩸 Diabetes Risk Check")
+    glucose = st.number_input('Glucose Level (mg/dL)', min_value=0, value=100)
+    age = st.number_input('Age', min_value=1, value=25)
     
-    col1, col2 = st.columns(2)
-    with col1:
-        glucose = st.number_input('Glucose Level', min_value=0)
-        bp = st.number_input('Blood Pressure', min_value=0)
-    with col2:
-        bmi_val = st.number_input('BMI Value', min_value=0.0)
-        age_db = st.number_input('Age', min_value=1)
-
-    if st.button("Diabetes Test Result"):
+    if st.button("Predict"):
         if glucose > 140:
-            st.error("High Risk of Diabetes")
-            st.info("💡 **Health Advice:**\n* Avoid sugary drinks, white bread, and pasta.\n* Monitor your blood sugar levels regularly.\n* Stay hydrated and increase physical activity.")
+            st.error("Status: High Risk Indicators")
+            st.write("⚠️ High glucose detected. Reduce sugar and consult a doctor.")
         else:
-            st.success("Result: Healthy")
-            st.info("💡 **Health Advice:**\n* Maintain a fiber-rich diet with whole grains.\n* Get regular health check-ups even if you feel fine.")
+            st.success("Status: Normal")
+            st.write("✅ Your glucose levels are within the safe range.")
 
-# --- Heart Disease Section ---
-elif selection == "🫀 Heart Disease":
-    st.title("Heart Disease Analysis")
+# --- 6. Heart Disease ---
+elif selection == "Heart Disease":
+    st.title("❤️ Heart Health Analysis")
+    chol = st.number_input('Cholesterol Level', min_value=100, value=200)
+    bp = st.number_input('Resting Blood Pressure', min_value=80, value=120)
     
-    col1, col2 = st.columns(2)
-    with col1:
-        age = st.number_input('Patient Age', min_value=1)
-        chol = st.number_input('Cholesterol Level', min_value=100)
-    with col2:
-        trestbps = st.number_input('Resting BP', min_value=50)
-        cp = st.selectbox('Chest Pain Type (0-3)', [0, 1, 2, 3])
-
-    if st.button("Check Heart Health"):
-        if (age > 50 and chol > 240) or (trestbps > 150):
-            st.error("Potential Heart Risk Detected")
-            st.info("💡 **Heart Care Tips:**\n* Switch to a low-sodium (salt) diet.\n* Avoid trans fats found in baked and fried goods.\n* Manage stress through meditation or light exercise.")
+    if st.button("Analyze"):
+        if chol > 240 or bp > 140:
+            st.error("Status: Risk Factors Detected")
+            st.write("⚠️ High cholesterol or BP can affect heart health. Take less salt.")
         else:
-            st.success("Heart Risk is Low")
-            st.info("💡 **Heart Care Tips:**\n* Include heart-healthy fats like olive oil and walnuts.\n* Ensure 7-8 hours of quality sleep for heart recovery.")
+            st.success("Status: Healthy Indicators")
+            st.write("✅ Your heart indicators look stable.")
 
-  # --- Parkinson's Test Section ---
-elif selection == "🧠 Parkinson's Test":
-    st.title("🧠 Parkinson's Risk Assessment")
-    col1, col2 = st.columns(2)
-    with col1:
-        tremor = st.selectbox("Do you experience hand tremors?", ["No", "Slightly", "Frequently"])
-    with col2:
-        age_p = st.number_input("Age", min_value=1, value=60)
-    
-    if st.button("Analyze Parkinson's Risk"):
-        if tremor != "No" and age_p > 50:
-            st.error("Moderate Risk Indicators Detected. Consult a Neurologist.")
-            st.info("💡 **Health Tip:** Exercise and physical therapy can help improve mobility.")
-        else:
-            st.success("Low Risk Detected. Stay active and healthy!")
+# --- 7. About Me ---
+elif selection == "About Me":
+    st.title("👨‍💻 About the Project")
+    st.markdown("### **Developer: Imtiaz Hussain**")
+    st.write("This app is developed to provide quick health insights using Python and Streamlit.")
+    st.divider()
+    st.caption("⚠️ Disclaimer: This is an AI tool for educational purposes. Always consult a real doctor for medical decisions.")
 
-# --- Lung Cancer Section ---
-elif selection == "🫁 Lung Cancer Risk":
-    st.title("🫁 Lung Cancer Screening")
-    smoking = st.radio("Do you smoke or have a history of smoking?", ["Yes", "No"])
-    cough = st.number_input("Duration of persistent cough (in weeks)", min_value=0)
-    
-    if st.button("Check Lung Health"):
-        if smoking == "Yes" and cough > 3:
-            st.error("High Risk Detected. A chest X-ray or consultation is recommended.")
-            st.info("💡 **Health Tip:** Quitting smoking is the best way to restore lung health.")
-        else:
-            st.success("Normal Indicators. Avoid air pollution and stay hydrated.")
-
-
-
-elif selection == "👨‍💻 About Me":
-    st.title("About the Developer")
-    st.subheader("Developed by: [Imtiaz Hussain]") 
-    
-    st.write("""
-    Welcome to the **AI Medical Hub**. This project was created to provide quick health insights 
-    using logical analysis. I have integrated multiple health tools like BMI calculation, 
-    Diabetes risk assessment, and Heart health monitoring into one platform.
-    """)
-    
-    st.info("### My Contribution:")
-    st.write("""
-    * Designed the User Interface using Streamlit.
-    * Implemented logical diagnostic rules for instant feedback.
-    * Added health recommendations and lifestyle tips for users.
-    * Ensured the app remains lightweight and error-free by using direct code logic.
-    """)
-
-    st.warning("⚠️ **Disclaimer:** This application is for educational purposes only. The results are based on general health logic and should not be taken as a final medical diagnosis. Always consult a certified doctor for professional advice.")
-    
+# Footer
+st.sidebar.markdown("---")
+st.sidebar.write("© 2026 AI Medical Hub")
