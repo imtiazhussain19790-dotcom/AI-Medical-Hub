@@ -1,6 +1,6 @@
 import streamlit as st
 st.set_page_config(page_title="AI Medical Hub", layout="wide")
-
+selection = st.sidebar.selectbox("Go to", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease", "About Me"])
 # --- DESIGN FIX ---
 st.markdown("""
     <style>
