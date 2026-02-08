@@ -1,5 +1,5 @@
 import streamlit as st
-st.set_page_content(page_title="AI Medical Hub", layout="wide")
+st.set_page_config(page_title="AI Medical Hub", layout="wide")
 
 # Custom CSS for beauty
 st.markdown("""
