@@ -4,7 +4,7 @@ if selection == "Home":
     st.title("Welcome to AI Medical Hub")
 # --- BMI Calculator Section ---
 elif selection == "BMI Calculator":
-    st.title("Advanced BMI Calculator")
+    st.title("Advanced BMI Calculator") 
 elif selection == "About Me":
     st.title("About the Developer")
     st.subheader("Developed by: [Imtiaz Hussain]") 
