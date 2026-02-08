@@ -90,7 +90,7 @@ elif selection == "Heart Disease":
             st.info("💡 **Heart Care Tips:**\n* Include heart-healthy fats like olive oil and walnuts.\n* Ensure 7-8 hours of quality sleep for heart recovery.")
 
     elif selection == "Lung Cancer Risk":
-    st.title("Lung Cancer Screening")
+        st.title("Lung Cancer Screening")
     smoking = st.radio("Do you smoke?", ["Yes", "No"])
     cough = st.number_input("How many weeks has your cough lasted?", min_value=0)
     chest_pain = st.checkbox("Do you have persistent chest pain?")
