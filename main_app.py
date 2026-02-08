@@ -25,7 +25,15 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-selection = st.sidebar.selectbox("Select Page", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease", "Parkinson's Test", "Lung Cancer Risk", "About Me"])
+selection = st.sidebar.selectbox("Go to Page", [
+    "🏠 Home", 
+    "⚖️ BMI Calculator", 
+    "🩸 Diabetes Prediction", 
+    "🫀 Heart Disease", 
+    "🧠 Parkinson's Test", 
+    "🫁 Lung Cancer Risk", 
+    "👨‍💻 About Me"
+])
 if selection == "Home":
     st.title("Welcome to AI Medical Hub")
 # --- BMI Calculator Section ---
