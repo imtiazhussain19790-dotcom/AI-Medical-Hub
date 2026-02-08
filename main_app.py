@@ -25,6 +25,7 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
 selection = st.sidebar.selectbox("Go to Page", [
     "🏠 Home", 
     "⚖️ BMI Calculator", 
