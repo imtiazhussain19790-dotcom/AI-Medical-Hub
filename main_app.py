@@ -5,7 +5,7 @@ if selection == "Home":
 # --- BMI Calculator Section ---
 if selection == "BMI Calculator":
     st.title("Advanced BMI Calculator")
-if selection == "About Me":
+elif selection == "About Me":
     st.title("About the Developer")
     st.subheader("Developed by: [Imtiaz Hussain]") 
     
