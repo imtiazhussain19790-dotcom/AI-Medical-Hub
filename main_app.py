@@ -5,143 +5,144 @@ st.set_page_config(page_title="AI Pro Medical Hub", page_icon="🏥", layout="wi
 
 # 2. Sidebar Navigation
 st.sidebar.title("🏥 AI Pro Medical Hub")
-st.sidebar.subheader("Advanced Diagnosis System")
 selection = st.sidebar.selectbox(
     "Select a Service:", 
-    ["🏠 Home", "⚖️ BMI Calculator", "🩸 Diabetes Prediction", "❤️ Heart Disease", "🧪 Liver Function", "🧠 Parkinson's Check", "👨‍💻 About Me"]
+    ["🏠 Home", "⚖️ BMI Calculator", "🩸 Diabetes Prediction", "❤️ Heart Disease", "🧪 Liver Function", "🧠 Parkinson's Check", "💡 Health Tips", "👨‍💻 About Me"]
 )
 
 # --- 3. Home Page ---
 if selection == "🏠 Home":
     st.title("🏥 Welcome to AI Pro Medical Hub")
-    st.subheader("Professional Grade Health Screening Tool")
+    st.subheader("Your Advanced AI Health Partner")
+    st.image("https://img.icons8.com/fluency/150/medical-heart.png")
     st.markdown("""
-    Ye app medical standards ke mutabiq design ki gayi hai. 
+    Ye app clinical standards ke mutabiq design ki gayi hai. 
     Aap sidebar se test select karein aur apni detail reports enter karein.
     """)
-    st.info("📢 **Updates:** Ab har test mein advanced parameters shamil kar diye gaye hain.")
+    st.info("📢 **Updates:** Ab har test ke sath aapko makhsoos Health Tips bhi di jayengi.")
 
-# --- 4. BMI Calculator (Advanced) ---
+# --- 4. BMI Calculator (With Health Tips) ---
 elif selection == "⚖️ BMI Calculator":
-    st.title("⚖️ Advanced BMI & Body Analysis")
+    st.title("⚖️ BMI & Body Analysis")
     col1, col2 = st.columns(2)
     with col1:
-        gender = st.radio("Select Gender", ["Male", "Female"])
-        age = st.number_input("Age", min_value=1, max_value=120, value=25)
         weight = st.number_input("Weight (kg)", min_value=1.0, value=70.0)
-    with col2:
-        st.write("Height Input:")
-        feet = st.number_input("Feet", min_value=1, max_value=8, value=5)
-        inches = st.number_input("Inches", min_value=0, max_value=11, value=7)
+        feet = st.number_input("Height: Feet", min_value=1, max_value=8, value=5)
+        inches = st.number_input("Height: Inches", min_value=0, max_value=11, value=7)
     
-    if st.button("Calculate Detailed BMI"):
-        # Height conversion to meters
+    if st.button("Calculate BMI"):
         total_inches = (feet * 12) + inches
         height_m = total_inches * 0.0254
         bmi = weight / (height_m * height_m)
-        
-        st.divider()
         st.subheader(f"Your BMI: {bmi:.2f}")
         
-        if bmi < 18.5: st.warning("Category: Underweight")
-        elif 18.5 <= bmi < 25: st.success("Category: Healthy")
-        elif 25 <= bmi < 30: st.info("Category: Overweight")
-        else: st.error("Category: Obese")
-        
-        # Ideal Weight Logic
-        ideal_weight = 22 * (height_m * height_m)
-        st.write(f"💡 Your Ideal Weight should be around: **{ideal_weight:.1f} kg**")
+        if bmi < 18.5:
+            st.warning("Category: Underweight")
+            st.write("💡 **Tip:** Proteins aur Healthy Fats ka istemal badhayein.")
+        elif 18.5 <= bmi < 25:
+            st.success("Category: Healthy")
+            st.write("💡 **Tip:** Isi tarah protein aur exercise ka tawazun barkarar rakhein.")
+        else:
+            st.error("Category: Overweight/Obese")
+            st.write("💡 **Tip:** Rozana 30 mins paidal chalein aur junk food se parhez karein.")
 
-# --- 5. Diabetes Prediction (Clinical Parameters) ---
+# --- 5. Diabetes Prediction (With Clinical Tips) ---
 elif selection == "🩸 Diabetes Prediction":
-    st.title("🩸 Clinical Diabetes Risk Analysis")
-    st.write("Please enter your latest lab report values:")
+    st.title("🩸 Diabetes Risk Analysis")
+    glucose = st.number_input("Glucose Level (mg/dL)", 0, 500, 100)
+    insulin = st.number_input("Insulin Level", 0, 900, 80)
     
-    col1, col2 = st.columns(2)
-    with col1:
-        pregnancies = st.number_input("Pregnancies (0 if Male)", 0, 20, 0)
-        glucose = st.number_input("Glucose Level (mg/dL)", 0, 500, 100)
-        bp = st.number_input("Blood Pressure (Diastolic)", 0, 150, 80)
-    with col2:
-        skin = st.number_input("Skin Thickness (mm)", 0, 100, 20)
-        insulin = st.number_input("Insulin Level (mu U/ml)", 0, 900, 80)
-        pedigree = st.number_input("Diabetes Pedigree Function", 0.0, 3.0, 0.5)
-
-    if st.button("Predict Diabetes Risk"):
-        if glucose > 140 or insulin > 160 or pedigree > 0.8:
-            st.error("Result: High Risk Indicators. Please consult a doctor.")
+    if st.button("Predict Diabetes"):
+        if glucose > 140:
+            st.error("Result: High Risk Indicators")
+            st.markdown("""
+            ### 💡 Health Tips for High Glucose:
+            * **Sugar se parhez:** Meethi cheezon aur soft drinks se door rahein.
+            * **Fiber:** Sabziyon aur phal ka istemal zyada karein.
+            * **Water:** Rozana 8-10 glass pani piyein.
+            """)
         else:
-            st.success("Result: Low Risk. Your parameters are within normal clinical range.")
+            st.success("Result: Normal")
+            st.write("💡 **Tip:** Har 6 mahine baad apna checkup karwate rahein.")
 
-# --- 6. Heart Disease (Cardiology Parameters) ---
+# --- 6. Heart Disease (With Cardio Tips) ---
 elif selection == "❤️ Heart Disease":
-    st.title("❤️ Advanced Heart Health Analysis")
-    col1, col2 = st.columns(2)
-    with col1:
-        age_h = st.number_input("Age", 1, 120, 45)
-        sex = st.selectbox("Sex", ["Male", "Female"])
-        cp = st.selectbox("Chest Pain Type", ["Typical Angina", "Atypical Angina", "Non-anginal Pain", "Asymptomatic"])
-        trestbps = st.number_input("Resting BP (mm Hg)", 80, 200, 120)
-    with col2:
-        chol = st.number_input("Serum Cholestoral (mg/dl)", 100, 600, 200)
-        fbs = st.radio("Fasting Blood Sugar > 120 mg/dl", ["True", "False"])
-        thalach = st.number_input("Max Heart Rate Achieved", 60, 220, 150)
-        oldpeak = st.number_input("ST Depression induced by exercise", 0.0, 6.0, 1.0)
-
-    if st.button("Analyze Heart Health"):
-        if trestbps > 140 or chol > 240 or thalach < 100:
-            st.error("Result: Cardiovascular Risk Detected. Specialist consultation recommended.")
+    st.title("❤️ Heart Health Analysis")
+    chol = st.number_input("Serum Cholestoral (mg/dl)", 100, 600, 200)
+    bp = st.number_input("Resting BP (mm Hg)", 80, 200, 120)
+    
+    if st.button("Analyze Heart"):
+        if chol > 240 or bp > 140:
+            st.error("Result: Risk Factors Detected")
+            st.markdown("""
+            ### 💡 Heart Care Tips:
+            * **Namak kam karein:** BP control karne ke liye namak ka istemal kam karein.
+            * **Healthy Fats:** Fried food ke bajaye nuts aur olive oil istemal karein.
+            * **Walk:** Dil ki mazbooti ke liye tez chalna behtareen exercise hai.
+            """)
         else:
-            st.success("Result: Heart indicators appear healthy.")
+            st.success("Result: Healthy Indicators")
+            st.write("💡 **Tip:** Stress kam karein aur neend puri karein.")
 
-# --- 7. Liver Function (Hepatology Parameters) ---
+# --- 7. Liver Function (With Liver Tips) ---
 elif selection == "🧪 Liver Function":
-    st.title("🧪 Full Liver Function Analysis (LFT)")
-    col1, col2 = st.columns(2)
-    with col1:
-        tot_bil = st.number_input("Total Bilirubin", 0.0, 10.0, 1.0)
-        dir_bil = st.number_input("Direct Bilirubin", 0.0, 10.0, 0.3)
-        alkphos = st.number_input("Alkaline Phosphatase", 10, 500, 100)
-    with col2:
-        sgpt = st.number_input("Alamine Aminotransferase (SGPT)", 5, 200, 30)
-        sgot = st.number_input("Aspartate Aminotransferase (SGOT)", 5, 200, 30)
-        prot = st.number_input("Total Proteins", 1.0, 10.0, 7.0)
-        alb = st.number_input("Albumin", 1.0, 10.0, 4.0)
-
-    if st.button("Run Liver Diagnosis"):
-        if tot_bil > 1.2 or sgpt > 40 or sgot > 40:
-            st.error("Result: Liver Enzymes/Bilirubin are High. Possible Liver Stress.")
+    st.title("🧪 Liver Function Analysis")
+    tot_bil = st.number_input("Total Bilirubin", 0.0, 10.0, 1.0)
+    sgpt = st.number_input("SGPT Level", 5, 200, 30)
+    
+    if st.button("Analyze Liver"):
+        if tot_bil > 1.2 or sgpt > 40:
+            st.error("Result: Liver Stress Detected")
+            st.markdown("""
+            ### 💡 Liver Health Tips:
+            * **Paani ka istemal:** Liver se zehreele mada nikalne ke liye pani piyein.
+            * **Processed Food:** Packaged aur processed food se parhez karein.
+            * **Green Tea:** Liver ki safayi mein madad deti hai.
+            """)
         else:
-            st.success("Result: Liver Function is Normal.")
+            st.success("Result: Normal")
 
-# --- 8. Parkinson's Check (Neurological Voice Analysis) ---
+# --- 8. Parkinson's Check ---
 elif selection == "🧠 Parkinson's Check":
-    st.title("🧠 Parkinson's Voice Stability Analysis")
-    st.write("Advanced Voice Frequency (MDVP) Parameters:")
-    col1, col2 = st.columns(2)
-    with col1:
-        fo = st.number_input("Average Vocal Fundamental Frequency (Hz)", 50.0, 300.0, 150.0)
-        hi = st.number_input("Maximum Vocal Fundamental Frequency (Hz)", 50.0, 500.0, 200.0)
-        lo = st.number_input("Minimum Vocal Fundamental Frequency (Hz)", 50.0, 300.0, 100.0)
-    with col2:
-        jitter = st.number_input("MDVP:Jitter(%)", 0.0, 0.1, 0.005, format="%.5f")
-        shimmer = st.number_input("MDVP:Shimmer", 0.0, 0.2, 0.02, format="%.5f")
-        hnr = st.number_input("HNR (Harmonics-to-Noise Ratio)", 0.0, 50.0, 20.0)
-
-    if st.button("Run Neurological Analysis"):
-        if jitter > 0.01 or hnr < 15 or shimmer > 0.05:
-            st.error("Result: High Jitter/Shimmer detected. Possible Neurological Indicators.")
+    st.title("🧠 Parkinson's Analysis")
+    jitter = st.number_input("MDVP:Jitter(%)", 0.0, 0.1, 0.005, format="%.5f")
+    
+    if st.button("Analyze"):
+        if jitter > 0.01:
+            st.error("Result: Neurological Indicators Found")
+            st.write("💡 **Tip:** Demaaghi sukoon ke liye Yoga aur Meditation karein.")
         else:
-            st.success("Result: Voice stability is within healthy range.")
+            st.success("Result: Normal")
 
-# --- 9. About Me ---
+# --- 9. NEW SECTION: General Health Tips ---
+elif selection == "💡 Health Tips":
+    st.title("💡 General Health & Wellness Tips")
+    st.subheader("Sehatmand Zindagi ke Sunheri Usool")
+    
+    tab1, tab2, tab3 = st.tabs(["Diet Plan", "Exercise", "Mental Health"])
+    
+    with tab1:
+        st.write("🍎 **Dietary Advice:**")
+        st.write("- Rozana kam az kam 5 tarah ki sabziyan aur phal khayein.")
+        st.write("- Pani ka zyada istemal karein (3 Liters daily).")
+        st.write("- Raat ka khana sone se 3 ghante pehle khayein.")
+    
+    with tab2:
+        st.write("🏃 **Physical Activity:**")
+        st.write("- Hafta mein 150 minute ki exercise lazmi karein.")
+        st.write("- Lift ke bajaye seedhiyon ka istemal karein.")
+    
+    with tab3:
+        st.write("🧘 **Mental Well-being:**")
+        st.write("- Rozana 7-8 ghante ki pur-sukoon neend lein.")
+        st.write("- Gehre saans lene ki mashq (Deep Breathing) karein.")
+
+# --- 10. About Me ---
 elif selection == "👨‍💻 About Me":
-    st.title("👨‍💻 Developer Information")
+    st.title("👨‍💻 Developer Profile")
     st.info("Developed by: **Imtiaz Hussain**")
-    st.write("This application uses clinical ranges to provide preliminary health assessments.")
-    st.divider()
-    st.caption("⚠️ **Medical Disclaimer:** This app is for informational purposes. It does NOT replace professional medical advice, diagnosis, or treatment.")
+    st.write("AI Solutions for Healthcare.")
 
 # Sidebar Footer
 st.sidebar.markdown("---")
-st.sidebar.caption("© 2026 AI Pro Medical Hub | v2.0")
+st.sidebar.caption("© 2026 AI Pro Medical Hub")
