@@ -1,27 +1,30 @@
 import streamlit as st
 st.set_page_config(page_title="AI Medical Hub", layout="wide")
 
+# --- DESIGN FIX ---
 st.markdown("""
     <style>
-    .stApp {
-        background-color: #f8f9fa;
+    /* Force background color */
+    [data-testid="stAppViewContainer"] {
+        background-color: #e5e7eb;
     }
-    .stButton>button {
-        width: 100%;
-        border-radius: 20px;
-        height: 3em;
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
-        border: none;
-        transition: 0.3s;
+    
+    /* Force buttons to be blue and rounded */
+    div.stButton > button:first-child {
+        background-color: #007bff !important;
+        color: white !important;
+        border-radius: 10px !important;
+        height: 50px !important;
+        width: 100% !important;
+        border: 2px solid #0056b3 !important;
     }
-    .stButton>button:hover {
-        background-color: #0056b3;
-        color: #ffdb58;
+
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        background-color: #ffffff;
     }
     </style>
-    """, unsafe_allow_html=True) # یہ لائن سب سے اہم ہے!
+""", unsafe_allow_html=True)
 selection = st.sidebar.selectbox("Select Page", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease", "Parkinson's Test", "Lung Cancer Risk", "About Me"])
 if selection == "Home":
     st.title("Welcome to AI Medical Hub")
