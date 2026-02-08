@@ -35,10 +35,10 @@ selection = st.sidebar.selectbox("Go to Page", [
     "🫁 Lung Cancer Risk", 
     "👨‍💻 About Me"
 ])
-if selection == "Home":
+if selection == "🏠 Home":
     st.title("Welcome to AI Medical Hub")
 # --- BMI Calculator Section ---
-elif selection == "BMI Calculator":
+elif selection == "⚖️ BMI Calculator":
     st.title("Advanced BMI Calculator") 
 
     col1, col2 = st.columns(2)
@@ -68,7 +68,7 @@ elif selection == "BMI Calculator":
                 st.info("💡 **Health Tips:**\n* Consult a healthcare professional immediately.\n* Start with low-impact exercises like swimming or walking.\n* Limit refined carbohydrates and high-fat dairy.")
 
 # --- Diabetes Prediction Section ---
-elif selection == "Diabetes Prediction":
+elif selection == "🩸 Diabetes Prediction":
     st.title("Diabetes Prediction (Analysis)")
     
     col1, col2 = st.columns(2)
@@ -88,7 +88,7 @@ elif selection == "Diabetes Prediction":
             st.info("💡 **Health Advice:**\n* Maintain a fiber-rich diet with whole grains.\n* Get regular health check-ups even if you feel fine.")
 
 # --- Heart Disease Section ---
-elif selection == "Heart Disease":
+elif selection == "🫀 Heart Disease":
     st.title("Heart Disease Analysis")
     
     col1, col2 = st.columns(2)
@@ -108,7 +108,7 @@ elif selection == "Heart Disease":
             st.info("💡 **Heart Care Tips:**\n* Include heart-healthy fats like olive oil and walnuts.\n* Ensure 7-8 hours of quality sleep for heart recovery.")
 
   # --- Parkinson's Test Section ---
-elif selection == "Parkinson's Test":
+elif selection == "🧠 Parkinson's Test":
     st.title("🧠 Parkinson's Risk Assessment")
     col1, col2 = st.columns(2)
     with col1:
@@ -124,7 +124,7 @@ elif selection == "Parkinson's Test":
             st.success("Low Risk Detected. Stay active and healthy!")
 
 # --- Lung Cancer Section ---
-elif selection == "Lung Cancer Risk":
+elif selection == "🫁 Lung Cancer Risk":
     st.title("🫁 Lung Cancer Screening")
     smoking = st.radio("Do you smoke or have a history of smoking?", ["Yes", "No"])
     cough = st.number_input("Duration of persistent cough (in weeks)", min_value=0)
@@ -138,7 +138,7 @@ elif selection == "Lung Cancer Risk":
 
 
 
-elif selection == "About Me":
+elif selection == "👨‍💻 About Me":
     st.title("About the Developer")
     st.subheader("Developed by: [Imtiaz Hussain]") 
     
