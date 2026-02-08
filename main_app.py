@@ -16,7 +16,7 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-selection = st.sidebar.selectbox("Select Page", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease", "Lung Cancer Risk", "Parkinson's Test", "About Me"])
+selection = st.sidebar.selectbox("Select Page", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease", "Parkinson's Test", "Lung Cancer Risk", "About Me"])
 if selection == "Home":
     st.title("Welcome to AI Medical Hub")
 # --- BMI Calculator Section ---
@@ -89,35 +89,34 @@ elif selection == "Heart Disease":
             st.success("Heart Risk is Low")
             st.info("💡 **Heart Care Tips:**\n* Include heart-healthy fats like olive oil and walnuts.\n* Ensure 7-8 hours of quality sleep for heart recovery.")
 
-    elif selection == "Lung Cancer Risk":
-            st.title("Lung Cancer Screening")
-    smoking = st.radio("Do you smoke?", ["Yes", "No"])
-    cough = st.number_input("How many weeks has your cough lasted?", min_value=0)
-    chest_pain = st.checkbox("Do you have persistent chest pain?")
-
-    if st.button("Check Risk"):
-        if (smoking == "Yes" and cough > 3) or (chest_pain and cough > 2):
-            st.error("Warning: High Risk Indicators. See a doctor for a Chest X-ray.")
-            st.info("💡 **Tips:** Quitting smoking is the single best way to reduce risk.")
-        else:
-            st.success("Results look normal. Stay away from air pollution.")
-
+  # --- Parkinson's Test Section ---
 elif selection == "Parkinson's Test":
-    st.title("Parkinson's Risk Assessment")
+    st.title("🧠 Parkinson's Risk Assessment")
     col1, col2 = st.columns(2)
     with col1:
         tremor = st.selectbox("Do you experience hand tremors?", ["No", "Slightly", "Frequently"])
-        speed = st.slider("Walking Speed (1 is very slow, 10 is fast)", 1, 10, 5)
     with col2:
-        voice = st.selectbox("Any changes in voice/speech?", ["No", "Hoarseness", "Softer voice"])
         age_p = st.number_input("Age", min_value=1, value=60)
-
-    if st.button("Analyze Risk"):
-        if (tremor != "No" and age_p > 50) or (speed < 4 and voice != "No"):
-            st.error("Moderate Risk Detected. Please consult a Neurologist.")
-            st.info("💡 **Tips:** Regular physical therapy and balance exercises can help.")
+    
+    if st.button("Analyze Parkinson's Risk"):
+        if tremor != "No" and age_p > 50:
+            st.error("Moderate Risk Indicators Detected. Consult a Neurologist.")
+            st.info("💡 **Health Tip:** Exercise and physical therapy can help improve mobility.")
         else:
-            st.success("Low Risk. Keep staying active!")
+            st.success("Low Risk Detected. Stay active and healthy!")
+
+# --- Lung Cancer Section ---
+elif selection == "Lung Cancer Risk":
+    st.title("🫁 Lung Cancer Screening")
+    smoking = st.radio("Do you smoke or have a history of smoking?", ["Yes", "No"])
+    cough = st.number_input("Duration of persistent cough (in weeks)", min_value=0)
+    
+    if st.button("Check Lung Health"):
+        if smoking == "Yes" and cough > 3:
+            st.error("High Risk Detected. A chest X-ray or consultation is recommended.")
+            st.info("💡 **Health Tip:** Quitting smoking is the best way to restore lung health.")
+        else:
+            st.success("Normal Indicators. Avoid air pollution and stay hydrated.")
 
 
 
