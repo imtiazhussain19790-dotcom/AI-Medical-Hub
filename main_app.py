@@ -1,15 +1,11 @@
 import streamlit as st
 st.set_page_config(page_title="AI Medical Hub", layout="wide")
 
-# Custom CSS for Professional Look
 st.markdown("""
     <style>
-    /* پوری ایپ کا بیک گراؤنڈ */
     .stApp {
         background-color: #f8f9fa;
     }
-    
-    /* بٹنوں کا ڈیزائن */
     .stButton>button {
         width: 100%;
         border-radius: 20px;
@@ -20,19 +16,12 @@ st.markdown("""
         border: none;
         transition: 0.3s;
     }
-    
-    /* بٹن پر ماؤس لانے سے رنگ بدلنا */
     .stButton>button:hover {
         background-color: #0056b3;
         color: #ffdb58;
     }
-    
-    /* کارڈز جیسا لک بنانے کے لیے */
-    .stTextInput, .stNumberInput, .stSelectbox {
-        border-radius: 10px;
-    }
     </style>
-    """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True) # یہ لائن سب سے اہم ہے!
 selection = st.sidebar.selectbox("Select Page", ["Home", "BMI Calculator", "Diabetes Prediction", "Heart Disease", "Parkinson's Test", "Lung Cancer Risk", "About Me"])
 if selection == "Home":
     st.title("Welcome to AI Medical Hub")
