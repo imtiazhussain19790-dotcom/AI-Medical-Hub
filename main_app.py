@@ -3,7 +3,7 @@ selection = st.sidebar.selectbox("Select Page", ["Home", "BMI Calculator", "Diab
 if selection == "Home":
     st.title("Welcome to AI Medical Hub")
 # --- BMI Calculator Section ---
-if selection == "BMI Calculator":
+elif selection == "BMI Calculator":
     st.title("Advanced BMI Calculator")
 elif selection == "About Me":
     st.title("About the Developer")
