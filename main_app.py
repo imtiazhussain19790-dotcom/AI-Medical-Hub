@@ -1,18 +1,35 @@
 import streamlit as st
 st.set_page_config(page_title="AI Medical Hub", layout="wide")
 
-# Custom CSS for beauty
+# Custom CSS for Professional Look
 st.markdown("""
     <style>
-    .main {
-        background-color: #f0f2f6;
+    /* پوری ایپ کا بیک گراؤنڈ */
+    .stApp {
+        background-color: #f8f9fa;
     }
+    
+    /* بٹنوں کا ڈیزائن */
     .stButton>button {
         width: 100%;
-        border-radius: 5px;
+        border-radius: 20px;
         height: 3em;
         background-color: #007bff;
         color: white;
+        font-weight: bold;
+        border: none;
+        transition: 0.3s;
+    }
+    
+    /* بٹن پر ماؤس لانے سے رنگ بدلنا */
+    .stButton>button:hover {
+        background-color: #0056b3;
+        color: #ffdb58;
+    }
+    
+    /* کارڈز جیسا لک بنانے کے لیے */
+    .stTextInput, .stNumberInput, .stSelectbox {
+        border-radius: 10px;
     }
     </style>
     """, unsafe_allow_html=True)
